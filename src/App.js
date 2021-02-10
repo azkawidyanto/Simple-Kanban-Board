@@ -1,12 +1,18 @@
 import './App.css';
-import Board from '@lourenci/react-kanban'
+import Board, { addColumn } from '@lourenci/react-kanban'
 import '@lourenci/react-kanban/dist/styles.css'
 import Card from "./card.js"
+import logoprosa from './Assets/logoprosa.png'
+import plus from './Assets/plus.png'
+import profpic from './Assets/profpic.png'
+import searchicon from './Assets/search-icon.png'
 
 function App() {
+// const [board, setBoard] = useState(initialBoard)
+// const newBoard = addColumn(board, {title,division,Assignee,duration})
+// setBoard(newBoard)
 
-
-const board = {
+const cards = {
     columns: [
       {
         id: 1,
@@ -15,7 +21,9 @@ const board = {
           {
             id: 1,
             title: 'Add card',
-            description: 'Add capability to add a card in a column'
+            description: 'Researcher',
+            Assignee:'A',
+            duration:'2 Days'
           },
         ]
       },
@@ -26,7 +34,9 @@ const board = {
           {
             id: 2,
             title: 'Drag-n-drop support',
-            description: 'Move a card between the columns'
+            description: 'Design',
+            assignee:'B',
+            duration:'2 Days'
           },
         ]
       },
@@ -37,7 +47,9 @@ const board = {
           {
             id: 3,
             title: 'Drag-n-drop support',
-            description: 'Move a card between the columns'
+            description: 'Backend',
+            Assignee:'C',
+            duration:'2 Days'
           },
         ]
       }
@@ -45,6 +57,7 @@ const board = {
   }
   const menus = ["Home","My Task","Notifications"];
   const teams = ["Researchers", "FE/BE Teams", "PM Team"];
+  const pics= ["profpic","profpic","profpic"]
   const listMenus = menus.map((number) =>
     <li key={number.toString()}>
       {number}
@@ -55,6 +68,12 @@ const board = {
     {number}
   </li>
 );
+const listPics = teams.map((number) =>
+<li key={number.toString()}>
+  {number}
+</li>
+);
+
   return (
     <div className="row" style={{height:"100vh", width:"100vw"}}>
         <div className="col-md-3" style={{backgroundColor:"#00B38F", paddingTop:"70px"}}>
@@ -62,13 +81,13 @@ const board = {
             <input editable={true} type="text" 
               placeholder="Search" />
             <a href="https://google.com">
-              <img src="search-icon.png" alt="search" style={{width:"20px"}}></img>
+              <img src={searchicon} alt="search" style={{width:"20px",float:"right", marginRight:"10px"}}></img>
             </a>
             </div>
             <div className="profile">
               <div className="profile-picture">
                 <div className="picture">
-                  <img src="/profpic.png" alt="profile_pic"></img>
+                  <img src={profpic} alt="profile_pic"></img>
                 </div>
                 <div className="name">
                   <h3>Emilee Simchenko</h3>
@@ -95,10 +114,12 @@ const board = {
             </div>
             <div className="team-list">
               <h2>Teams</h2>
-              <ul>{listTeams}</ul>
+              <ul>
+                {listTeams} 
+              </ul>
               <div className="add-team">
                   <div className="plus-logo">
-                    <img src="/plus.png" alt="plus" ></img>
+                    <img src={plus} alt="plus" ></img>
                   </div>
                   <div className ="text">
                     <h2>Add a Team</h2>
@@ -111,17 +132,38 @@ const board = {
         </div>
         <div className="col-md-9" style={{marginTop:"20px"}}>
           <div className="row 4">
-            <img src="/logoprosa.png" alt="logo prosa" style={{width:"50px"}}></img>
+            <img src={logoprosa} alt="logo prosa" style={{width:"50px"}}></img>
             <h1>Kanban Prosa</h1>
             <div className="member">
-              <img src="/profpic.png" alt="profile_pic"></img>
+              <img src={profpic} alt="profile_pic"></img>
             </div>
           </div>
           
           <div className="row 8" style={{paddingTop:"50px",paddingLeft:"40px"}}>
-            <Board initialBoard={board} />
-            {/* <Card /> */}
-            {/* <Kanban /> */}
+          {/* <Board initialBoard={cards} />   */}
+            <Board  initialBoard={cards}
+             allowRemoveLane
+             allowRenameColumn
+             allowRemoveCard
+             onLaneRemove={console.log}
+             onCardRemove={console.log}
+             onLaneRename={console.log}
+             initialBoard={cards}
+             allowAddCard={{ on: "top" }}
+             onNewCardConfirm={draftCard => ({
+              id: new Date().getTime(),
+              ...draftCard
+            })}
+            onCardNew={console.log} 
+            //  renderCard={({ cards }, { removeCard, dragging }) => (
+            //   <Card dragging={dragging}>
+            //     {cards}
+            //     <button type="button" onClick={removeCard}>Remove Card</button>
+            //   </Card>
+            // )}
+            />
+              {/* {cards}
+            </Board> */}
           </div>
         </div>
         <style jsx>{`
