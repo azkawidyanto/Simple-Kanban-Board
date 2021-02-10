@@ -1,8 +1,7 @@
 import './App.css';
-import Board, {moveCard} from '@lourenci/react-kanban'
+import Board, { addColumn } from '@lourenci/react-kanban'
 import '@lourenci/react-kanban/dist/styles.css'
-import Card from "./card.js"
-
+import Card from "./src/card.js"
 import logoprosa from './Assets/logoprosa.png'
 import plus from './Assets/plus.png'
 import profpic from './Assets/profpic.png'
@@ -13,7 +12,7 @@ function App() {
 // const newBoard = addColumn(board, {title,division,Assignee,duration})
 // setBoard(newBoard)
 
-const board = {
+const cards = {
     columns: [
       {
         id: 1,
@@ -21,70 +20,24 @@ const board = {
         cards: [
           {
             id: 1,
-            content: 
-            {
-              title: 'Improve Accuracy of voice-to-text model',
-              division: 'Researcher',
-              Assignee:'A',
-              duration:'2 Days'
-            }
+            title: 'Add card',
+            description: 'Researcher',
+            Assignee:'A',
+            duration:'2 Days'
           },
-          {
-            id: 2,
-            content: 
-            {
-              title: 'Create API to load user info from database',
-              division: 'Backend',
-              Assignee:'B',
-              duration:'2 Days'
-            }
-          },
-          {
-            id: 3,
-            content: 
-            {
-              title: 'Two factor authentication to make private',
-              division: 'Design',
-              Assignee:'C',
-              duration:'2 Days'
-            }
-          }
         ]
       },
       {
         id: 2,
         title: 'To Do',
         cards: [
-                   {
-            id: 3,
-            content: 
-            {
-              title: 'Two factor authentication to make private',
-              division: 'Design',
-              Assignee:'C',
-              duration:'2 Days'
-            }
-          },
           {
             id: 2,
-            content: 
-            {
-              title: 'Create API to load user info from database',
-              division: 'Backend',
-              Assignee:'B',
-              duration:'2 Days'
-            }
+            title: 'Drag-n-drop support',
+            description: 'Design',
+            assignee:'B',
+            duration:'2 Days'
           },
-          {
-            id: 1,
-            content: 
-            {
-              title: 'Improve Accuracy of voice-to-text model',
-              division: 'Researcher',
-              Assignee:'A',
-              duration:'2 Days'
-            }
-          }
         ]
       },
       {
@@ -92,31 +45,19 @@ const board = {
         title: 'Done',
         cards: [
           {
-              id: 1,
-              content: 
-              {
-                title: 'Improve Accuracy of voice-to-text model',
-                division: 'Researcher',
-                Assignee:'A',
-                duration:'2 Days'
-              }
-            },
-            {
-              id: 2,
-              content: 
-              {
-                title: 'Create API to load user info from database',
-                division: 'Backend',
-                Assignee:'B',
-                duration:'2 Days'
-              }
-            }
+            id: 3,
+            title: 'Drag-n-drop support',
+            description: 'Backend',
+            Assignee:'C',
+            duration:'2 Days'
+          },
         ]
       }
     ]
   }
   const menus = ["Home","My Task","Notifications"];
   const teams = ["Researchers", "FE/BE Teams", "PM Team"];
+  const pics= ["profpic","profpic","profpic"]
   const listMenus = menus.map((number) =>
     <li key={number.toString()}>
       {number}
@@ -127,14 +68,20 @@ const board = {
     {number}
   </li>
 );
+const listPics = teams.map((number) =>
+<li key={number.toString()}>
+  {number}
+</li>
+);
+
   return (
     <div className="row" style={{height:"100vh", width:"100vw"}}>
-        <div className="col-md-3" style={{backgroundColor:"#00B38F", paddingTop:"30px"}}>
-            <div className="searchbox" >
+        <div className="col-md-3" style={{backgroundColor:"#00B38F", paddingTop:"70px"}}>
+            <div className="searchbox">
             <input editable={true} type="text" 
               placeholder="Search" />
             <a href="https://google.com">
-              <img src={searchicon} alt="search" style={{width:"20px"}}></img>
+              <img src={searchicon} alt="search" style={{width:"20px",float:"right", marginRight:"10px"}}></img>
             </a>
             </div>
             <div className="profile">
@@ -167,7 +114,9 @@ const board = {
             </div>
             <div className="team-list">
               <h2>Teams</h2>
-              <ul>{listTeams}</ul>
+              <ul>
+                {listTeams} 
+              </ul>
               <div className="add-team">
                   <div className="plus-logo">
                     <img src={plus} alt="plus" ></img>
@@ -181,40 +130,41 @@ const board = {
 
             </div>
         </div>
-        <div className="col-md-9" style={{marginLeft:"0px",marginTop:"20px"}}>
-          <div className="row 4">
-            <img src={logoprosa} alt="logo prosa" style={{marginLeft:"30px",width:"50px"}}></img>
-            <h1 className="font-weight-bold">Kanban Prosa</h1>
+        <div className="col-md-9" style={{marginTop:"20px"}}>
+          <div className="row-ml-4">
+            <img src={logoprosa} alt="logo prosa" style={{width:"50px", marginLeft:"30px"}}></img>
+            <h1>Kanban Prosa</h1>
             <div className="member">
               <img src={profpic} alt="profile_pic"></img>
             </div>
           </div>
           
           <div className="row 8" style={{paddingTop:"50px",paddingLeft:"40px"}}>
-          {/* <Board initialBoard={cards} />   */}
-            <Board className="text-board" 
-            initialBoard={board} 
-            allowRemoveLane
-            allowRenameColumn
-            allowRemoveCard
-            onLaneRemove={console.log}
-            onCardRemove={console.log}
-            onLaneRename={console.log}
-            onNewCardConfirm={draftCard => ({
+          <Board initialBoard={cards} />   */}
+
+            <Board  initialBoard={cards}
+             allowRemoveLane
+             allowRenameColumn
+             allowRemoveCard
+             onLaneRemove={console.log}
+             onCardRemove={console.log}
+             onLaneRename={console.log}
+             initialBoard={cards}
+             allowAddCard={{ on: "top" }}
+             onNewCardConfirm={draftCard => ({
               id: new Date().getTime(),
               ...draftCard
             })}
             onCardNew={console.log} 
-            allowAddCard={{ on: "top" }}
-            renderCard={({ content }, { removeCard, dragging }) => (
-              <Card dragging={dragging}>
-                {content}
-                <button type="button" onClick={removeCard}>Remove Card</button>
-              </Card>
-            )}
-            >
-              {board}
-            </Board>
+            //  renderCard={({ cards }, { removeCard, dragging }) => (
+            //   <Card dragging={dragging}>
+            //     {cards}
+            //     <button type="button" onClick={removeCard}>Remove Card</button>
+            //   </Card>
+            // )}
+            />
+               {/* {cards}
+            </Board> */}
           </div>
         </div>
         <style jsx>{`
@@ -257,9 +207,6 @@ const board = {
           opacity: 1;
         }
         
-        .profile{
-          margin-top:20px;
-        }
         .picture img{
           width:40px;
         }
@@ -271,7 +218,6 @@ const board = {
 
         }
         .picture{
-          
           flex-basis: 20%;
         }
 
@@ -377,10 +323,6 @@ const board = {
         .plus-logo img{
           width:20px; 
           display:flex;
-        }
-
-        .board{
-          font-size: 1.3rem;
         }
 
         `}       
