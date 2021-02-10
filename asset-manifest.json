@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "/Simple-Kanban-Board/static/css/main.7d180cbf.chunk.css",
+    "main.js": "/Simple-Kanban-Board/static/js/main.4b3dd994.chunk.js",
+    "main.js.map": "/Simple-Kanban-Board/static/js/main.4b3dd994.chunk.js.map",
+    "runtime-main.js": "/Simple-Kanban-Board/static/js/runtime-main.83946c45.js",
+    "runtime-main.js.map": "/Simple-Kanban-Board/static/js/runtime-main.83946c45.js.map",
+    "static/css/2.35c8557f.chunk.css": "/Simple-Kanban-Board/static/css/2.35c8557f.chunk.css",
+    "static/js/2.edcf648a.chunk.js": "/Simple-Kanban-Board/static/js/2.edcf648a.chunk.js",
+    "static/js/2.edcf648a.chunk.js.map": "/Simple-Kanban-Board/static/js/2.edcf648a.chunk.js.map",
+    "index.html": "/Simple-Kanban-Board/index.html",
+    "static/css/2.35c8557f.chunk.css.map": "/Simple-Kanban-Board/static/css/2.35c8557f.chunk.css.map",
+    "static/css/main.7d180cbf.chunk.css.map": "/Simple-Kanban-Board/static/css/main.7d180cbf.chunk.css.map",
+    "static/js/2.edcf648a.chunk.js.LICENSE.txt": "/Simple-Kanban-Board/static/js/2.edcf648a.chunk.js.LICENSE.txt",
+    "static/media/plus.72be97e6.png": "/Simple-Kanban-Board/static/media/plus.72be97e6.png",
+    "static/media/profpic.6264796c.png": "/Simple-Kanban-Board/static/media/profpic.6264796c.png",
+    "static/media/search-icon.ae7b0805.png": "/Simple-Kanban-Board/static/media/search-icon.ae7b0805.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.83946c45.js",
+    "static/css/2.35c8557f.chunk.css",
+    "static/js/2.edcf648a.chunk.js",
+    "static/css/main.7d180cbf.chunk.css",
+    "static/js/main.4b3dd994.chunk.js"
+  ]
+}
